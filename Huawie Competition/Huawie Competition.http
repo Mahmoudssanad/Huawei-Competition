@@ -1,0 +1,6 @@
+@Huawie_Competition_HostAddress = http://localhost:5075
+
+GET {{Huawie_Competition_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
