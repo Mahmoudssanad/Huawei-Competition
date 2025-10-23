@@ -426,9 +426,9 @@ FodyWeavers.xsd
 *.log
 logs/
 
-# Ignore configuration and project files
+# Ignore configuration
 *.json
-*.csproj
+
 
 # Ignore .http
 *.http
