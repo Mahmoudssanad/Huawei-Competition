@@ -429,3 +429,6 @@ logs/
 # Ignore configuration and project files
 *.json
 *.csproj
+
+# Ignore .http
+*.http
