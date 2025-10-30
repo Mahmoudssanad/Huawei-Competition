@@ -1,4 +1,5 @@
 ﻿
+using GreenEye.Application.DTOs;
 using GreenEye.Domain.Entities;
 using GreenEye.Infrasturcture.Identity;
 
@@ -13,6 +14,16 @@ namespace GreenEye.Infrasturcture.Conversion
             Email = user.Email,
             TelephoneNumber = user.PhoneNumber,
             Address = user.Address
+            //Password = user.PasswordHash
+        };
+
+        public static ApplicationUser ToApplicationUser(RegisterDTO user) => new ApplicationUser
+        {
+            UserName = user.Name,
+            Email = user.Email,
+            PhoneNumber = user.TelephoneNumber,
+            Address = user.Address,
+            
         };
 
         public static (ApplicationUser?, IEnumerable<ApplicationUser>?) FromUser(User? user, IEnumerable<User> users)
@@ -26,7 +37,8 @@ namespace GreenEye.Infrasturcture.Conversion
                     UserName = user.Name,
                     Address = user.Address,
                     Email = user.Email,
-                    PhoneNumber = user.TelephoneNumber
+                    PhoneNumber = user.TelephoneNumber,
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.Password)
                 };
                 return (singleUser, null);
             }
@@ -40,10 +52,13 @@ namespace GreenEye.Infrasturcture.Conversion
                     UserName = user.Name,
                     Address = user.Address,
                     Email = user.Email,
-                    PhoneNumber = user.TelephoneNumber
+                    PhoneNumber = user.TelephoneNumber,
+                    PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.Password)
+
                 });
                 return (null, _users);
             }
+
             return (null, null);
         }
             
